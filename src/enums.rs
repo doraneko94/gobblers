@@ -1,7 +1,19 @@
-#[derive(Clone, Copy)]
+use std::ops::Not;
+
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Player {
     Orange = 2,
     Blue = 1,
+}
+
+impl Not for Player {
+    type Output = Self;
+    fn not(self) -> Self::Output {
+        match self {
+            Self::Orange => Self::Blue,
+            Self::Blue => Self::Orange
+        }
+    }
 }
 
 #[derive(Clone, Copy)]

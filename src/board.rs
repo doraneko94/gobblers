@@ -18,7 +18,7 @@ impl BoardMap {
             hand_blue: Vec::with_capacity(9) }
     }
 
-    pub fn from_board(bit: Bit) -> BoardMap {
+    pub fn from_bit(bit: Bit) -> BoardMap {
         let mut bm = BoardMap::new();
         for i in 0..9 {
             let (y, x) = ((i/3) as usize, (i%3) as usize);
@@ -32,10 +32,10 @@ impl BoardMap {
             }
         }
         for pi in 0..3 {
-            for _ in 0..bit.get_hand(Player::Orange, Piece::from_num(pi)) {
+            for _ in 0..3-bit.get_used(Player::Orange, Piece::from_num(pi)) {
                 bm.hand_orange.push(ORANGE_PIECES[pi])
             }
-            for _ in 0..bit.get_hand(Player::Blue, Piece::from_num(pi)) {
+            for _ in 0..3-bit.get_used(Player::Blue, Piece::from_num(pi)) {
                 bm.hand_blue.push(BLUE_PIECES[pi])
             }
         }
